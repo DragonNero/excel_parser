@@ -10,7 +10,7 @@
         <div class="container mx-auto px-4">
             @foreach($excelFields->groupBy('date') as $date => $fields)
                 <div class="mb-6">
-                    <h2 class="text-2xl font-bold mb-3">{{ $date }}</h2>
+                    <h2 class="text-2xl font-bold mb-3">{{ \Carbon\Carbon::parse($date)->format('d.m.Y') }}</h2>
 
                     <table class="min-w-full bg-white shadow-md rounded">
                         <thead>
@@ -25,7 +25,7 @@
                                 <tr>
                                     <td class="py-2 px-3 border-b border-gray-200">{{ $field->id }}</td>
                                     <td class="py-2 px-3 border-b border-gray-200">{{ $field->name }}</td>
-                                    <td class="py-2 px-3 border-b border-gray-200">{{ $field->date }}</td>
+                                    <td class="py-2 px-3 border-b border-gray-200">{{ \Carbon\Carbon::parse($field->date)->format('d.m.Y') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
