@@ -25,7 +25,7 @@
                 <tr>
                     <td x-text="row.id"></td>
                     <td x-text="row.name"></td>
-                    <td x-text="row.date.date"></td>
+                    <td x-text="formatDate(row.date.date)"></td>
                 </tr>
             </template>
         </tbody>
@@ -35,7 +35,7 @@
     <div x-show="errors.length > 0" class="mt-4">
         <h3 class="text-red-500">Import Errors</h3>
         <ul>
-            <template x-for="error in errors" :key="error">
+            <template x-for="(error, index) in errors" :key="index">
                 <li x-text="error" class="text-red-400"></li>
             </template>
         </ul>
@@ -59,6 +59,14 @@
                     });
 
                     this.initialized = true;
+                },
+                formatDate(dateString) {
+                    const date = new Date(dateString);
+                    const day = String(date.getDate()).padStart(2, '0');
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    const year = date.getFullYear();
+
+                    return `${day}.${month}.${year}`;
                 }
             }
         }

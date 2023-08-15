@@ -9,7 +9,10 @@ class ExcelField extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
+
     protected $fillable = [
+        'id',
         'name',
         'date',
     ];

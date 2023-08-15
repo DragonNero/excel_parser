@@ -12,7 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('excelField')" :active="request()->routeIs('excelField')">
+                    <x-nav-link :href="route('excelField')" active="{{ strpos(request()->route()->getName(), 'excelField') !== false ? 'true' : 'false' }}">
                         {{ __('Excel Parser') }}
                     </x-nav-link>
                 </div>
@@ -67,7 +67,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('excelField')" :active="request()->routeIs('excelField')">
+            <x-responsive-nav-link :href="route('excelField')" active="{{ strpos(request()->route()->getName(), 'excelField') !== false ? 'true' : 'false' }}">
                 {{ __('Excel Parser') }}
             </x-responsive-nav-link>
         </div>
