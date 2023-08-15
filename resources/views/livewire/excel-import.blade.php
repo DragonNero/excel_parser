@@ -1,4 +1,4 @@
-<div>
+<div x-data="excelImporter()" x-init="init">
     <div>
         <form wire:submit.prevent="importExcel">
             <input type="file" wire:model="excel" required>
@@ -21,11 +21,11 @@
             </tr>
         </thead>
         <tbody>
-            <template x-for="row in importedRows" :key="row.id">
+            <template x-for="(row, index) in importedRows" :key="index">
                 <tr>
                     <td x-text="row.id"></td>
                     <td x-text="row.name"></td>
-                    <td x-text="row.date"></td>
+                    <td x-text="row.date.date"></td>
                 </tr>
             </template>
         </tbody>
@@ -47,15 +47,18 @@
                 importedRows: [],
                 errors: [],
                 init() {
+                    if (this.initialized) return;
+
                     Echo.channel('excel-import')
-                        .listen('RowProcessed', (e) => {
-                            console.log(e)
-                            if (e.error) {
-                                this.errors.push(e.error);
-                            } else {
-                                this.importedRows.push(e.row);
-                            }
-                        });
+                    .listen('RowProcessed', (e) => {
+                        if (e.error) {
+                            this.errors.push(e.error);
+                        } else {
+                            this.importedRows.push(e.row);
+                        }
+                    });
+
+                    this.initialized = true;
                 }
             }
         }
