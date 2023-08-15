@@ -11,7 +11,7 @@
         @endif
     </div>
 
-    <!-- Display imported rows -->
+    <!-- TODO: might be better to change into a progress bar -->
     <table>
         <thead>
             <tr>
